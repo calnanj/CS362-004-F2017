@@ -1,0 +1,40 @@
+        -:    0:Source:unittest1.c
+        -:    0:Programs:4
+        -:    1:/*Jessica Calnan
+        -:    2:CS 362 Fall 2017
+        -:    3:Assignment 3 Due 10/22/17
+        -:    4:Unit Test: Is Game Over*/
+        -:    5:
+        -:    6:#include "dominion.h"
+        -:    7:#include "dominion_helpers.h"
+        -:    8:#include "rngs.h"
+        -:    9:#include <string.h>
+        -:   10:#include <stdio.h>
+        -:   11:#include <math.h>
+        -:   12:#include <stdlib.h>
+        -:   13:#include <assert.h>
+        -:   14:
+function main called 3 returned 100% blocks executed 100%
+        3:   15:int main(int argc, char** argv)/*argument count and num arguments passed to function*/
+        -:   16:    {	
+        -:   17:	struct gameState GS;
+        3:   18:	int c[10] = {sea_hag, tribute, smithy, village, minion, mine, adventurer, gardens, embargo, cutpurse}; //cards
+        3:   19:	int n = initializeGame(2, c, 3, &GS);
+call    0 returned 100%
+        -:   20:
+        -:   21:	
+        3:   22:	printf("\nBegin Testing: Is Game Over\n"); //message that testing has begun
+call    0 returned 100%
+        -:   23:
+        3:   24:	int i = isGameOver(&GS);
+call    0 returned 100%
+        -:   25:	if (i == 0);
+        3:   26:	printf("\n Pass \n");//pass?
+call    0 returned 100%
+        -:   27:
+        3:   28:	printf("\nEnd of Test: Is Game Over\n"); //message that testing has ended
+call    0 returned 100%
+        -:   29:	
+        -:   30:	if(n == 0);
+        3:   31:	return 0; //exit
+        -:   32:    } 

@@ -1,0 +1,46 @@
+        -:    0:Source:unittest3.c
+        -:    0:Programs:4
+        -:    1:/// Jessica Calnan
+        -:    2:/// CS 362 Fall 2017
+        -:    3:/// Assignment 3 Due 10/22/17
+        -:    4:/// Unit Test: Whose Turn
+        -:    5:
+        -:    6:#include "dominion.h"
+        -:    7:#include "dominion_helpers.h"
+        -:    8:#include "rngs.h"
+        -:    9:#include <string.h>
+        -:   10:#include <stdio.h>
+        -:   11:#include <math.h>
+        -:   12:#include <stdlib.h>
+        -:   13:#include <assert.h>
+        -:   14:	
+function main called 2 returned 100% blocks executed 100%
+        2:   15:int main (int argc, char** argv)	//argument count and num arguments passed to function
+        -:   16:{
+        -:   17:    struct gameState GS;
+        -:   18:    int n;
+        2:   19:	int c[10] = {sea_hag, tribute, smithy, village, minion, mine, adventurer, gardens, embargo, cutpurse}; //cards
+        -:   20:	
+        2:   21:	printf ("\nStart Test: Whose Turn\n"); //message that testing has begun
+call    0 returned 100%
+        -:   22:	
+        2:   23:	printf("\nTest Pass Expected: 3 times\n"); //loop through 3 times and expecting 3 passes
+call    0 returned 100%
+        -:   24:	
+        8:   25:    for (int i = 2 ; i < 5 ; ++i)	{
+branch  0 taken 75%
+branch  1 taken 25% (fallthrough)
+        6:   26:        n = initializeGame(2, c, 5, &GS);
+call    0 returned 100%
+        6:   27:        n = whoseTurn(&GS);
+call    0 returned 100%
+        6:   28:        if(n == GS.whoseTurn);
+        6:   29:		printf("\nPass\n");		
+call    0 returned 100%
+        -:   30:	}
+        -:   31:
+        2:   32:	printf("\nEnd of Test: Whose Turn\n"); //message that testing has ended
+call    0 returned 100%
+        -:   33:
+        2:   34:	return 0; //exit
+        -:   35:} 
