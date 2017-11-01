@@ -1,0 +1,96 @@
+        -:    0:Source:randomtestcard2.c
+        -:    0:Programs:3
+        -:    0:Source is newer than graph
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include "rngs.h"
+        -:    4:#include <string.h>
+        -:    5:#include <time.h>
+        -:    6:#include <stdio.h>
+        -:    7:#include <assert.h>
+        -:    8:#include <stdlib.h>
+        -:    9:
+        -:   10:
+        -:   11:#define DEBUG 0
+        -:   12:#define NOISY_TEST 1
+        -:   13:
+        -:   14:int cardSmithy(struct gameState *GS, int *currPlayer, int *handPos);
+        -:   15:
+function rand_num called 1550468 returned 100% blocks executed 100%
+  1550468:   16:int rand_num(int min, int max){
+  1550468:   17:    int result=0,low=0,hi=0;
+  1550468:   18:    if(min < max)
+branch  0 taken 18% (fallthrough)
+branch  1 taken 82%
+        -:   19:    {
+   280468:   20:        low = min;
+   280468:   21:        hi = max + 1; // includes max in output
+        -:   22:    }else{
+  1270000:   23:        low = max + 1; // includes max in output
+  1270000:   24:        hi = min;
+        -:   25:    }
+  1550468:   26:    srand(time(NULL));
+call    0 returned 100%
+call    1 returned 100%
+  1550468:   27:    result = (rand()%(hi - low ))+low;
+call    0 returned 100%
+  1550468:   28:    return result;
+        -:   29:}
+        -:   30:
+function main called 3 returned 100% blocks executed 94%
+        3:   31:int main(int argc, char const *argv[]){
+        -:   32:	
+        -:   33:	struct gameState GS;
+        -:   34:
+        -:   35:	int i, j;
+        3:   36:	int n[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse, sea_hag, tribute, smithy};
+        -:   37:	int card;
+        -:   38:
+        -:   39:	// initialize smithy vars
+        -:   40:	int currPlayer;
+        3:   41:	int handPos = -1;
+        -:   42:	int handCards;
+        -:   43:
+        -:   44:
+        -:   45:
+      158:   46:	for (i = 0; i < rand_num(0, 100); i ++){ // loop random # of times <100
+call    0 returned 100%
+branch  1 taken 98%
+branch  2 taken 2% (fallthrough)
+      155:   47:		initializeGame(rand_num(2,4), n, rand_num(1, 9), &GS); // random seed
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+        -:   48:
+  1550155:   49:		for (j = 0; j < 10000; j++){ // run 10000 times w/rand vars
+branch  0 taken 99%
+branch  1 taken 1% (fallthrough)
+  1550000:   50:			currPlayer = GS.whoseTurn;
+        -:   51:
+  1550000:   52:			handCards = GS.handCount[currPlayer];
+        -:   53:
+  1550000:   54:			if((card = cardSmithy(&GS, &currPlayer, &handPos)) != 0)
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+    #####:   55:				printf("Error: Smithy returned something other than 0. Random Game[%d] iteration[%d]\n", i, j);
+call    0 never executed
+        -:   56:			
+  1550000:   57:			if (handCards <= GS.handCount[currPlayer])
+branch  0 taken 2% (fallthrough)
+branch  1 taken 98%
+        -:   58:				printf("Error: Player did not draw enough cards. Random Game[%d] iteration[%d]\n", i, j);
+        -:   59:			
+    35985:   60:			GS.outpostPlayed = 0;
+  1550000:   61:  			GS.phase = 0;
+  1550000:   62:			GS.numActions = 1;
+  1550000:   63:			GS.numBuys = 1;
+  1550000:   64:			GS.playedCardCount = 0;
+  1550000:   65:			GS.whoseTurn = rand_num(2, GS.numPlayers);
+call    0 returned 100%
+  1550000:   66:			GS.handCount[GS.whoseTurn] = 0;
+        -:   67:		}
+        -:   68:	}
+        -:   69:
+        3:   70:	return 0;
+        -:   71:}
