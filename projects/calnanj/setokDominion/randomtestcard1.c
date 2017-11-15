@@ -40,10 +40,10 @@ int main() {
 		GS.numActions = rand() % 10; 
 		memcpy(&tempState, &GS, sizeof(struct gameState));
 		j = cardEffect(village, 0, 0, 0, &GS, 0, 0);		// run card
-		assert (j == 0);
+		if (j == 0){
 		if (GS.deckCount[player] != (tempState.deckCount[player] - 1)) { errors++; }
 		if (GS.numActions != (tempState.numActions + 2)) { errors++; }		// village card = +2 actions
-
+		}
 	}	
 	printf("Errors: %d\n", errors);
 	printf("End of Random Card Test: Village\n");
