@@ -1,0 +1,90 @@
+        -:    0:Source:cardtest2.c
+        -:    0:Programs:9
+        -:    1:// Jessica Calnan
+        -:    2:// CS 362 Fall 2017
+        -:    3:// Assignment 3 Due 10/22/17
+        -:    4:// Card Test: Smithy
+        -:    5:
+        -:    6:#include "dominion.h"
+        -:    7:#include "dominion_helpers.h"
+        -:    8:#include "rngs.h"
+        -:    9:#include <string.h>
+        -:   10:#include <stdio.h>
+        -:   11:#include <math.h>
+        -:   12:#include <stdlib.h>
+        -:   13:#include <assert.h>
+        -:   14:
+function main called 2 returned 100% blocks executed 86%
+        2:   15:int main() 
+        -:   16:{
+        -:   17:
+        -:   18:	
+        -:   19:	int  j, pass;
+        2:   20:	int c[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse, 
+        -:   21:	       sea_hag, tribute, smithy}; //cards
+        -:   22:	
+        -:   23:	
+        -:   24:	struct gameState GS;
+        -:   25:	
+        2:   26:	printf("\nStart of Card Test: Smithy\n"); //message to indicate the card test has begun
+call    0 returned 100%
+        -:   27:	
+        2:   28:	j = initializeGame(2, c, 2, &GS);
+call    0 returned 100%
+        -:   29:	
+        2:   30:	assert(j == 0);
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+call    2 never executed
+        -:   31:	
+        2:   32:	GS.hand[0][0] = smithy;
+        2:   33:	GS.handCount[0] = 1;
+        2:   34:	GS.discardCount[0] = 0;
+        -:   35:	
+        2:   36:	GS.deck[0][0] = copper; //deck cards (coin cards)
+        2:   37:	GS.deck[0][1] = silver;
+        2:   38:	GS.deck[0][2] = gold;
+        2:   39:	GS.deckCount[0] = 3;
+        -:   40:	
+        2:   41:	playCard(0, 0, 0, 0, &GS);
+call    0 returned 100%
+        -:   42:	
+        2:   43:	pass = 1;
+        2:   44:	if (GS.handCount[0] != 3) {
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        2:   45:		printf("Hand count is wrong.\nIt is: %d\nIt should be: 3\n", GS.handCount[0]);
+call    0 returned 100%
+        2:   46:		pass = 0;
+        -:   47:	}
+        2:   48:	if (GS.discardCount[0] != 1) {
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        2:   49:		printf("Discard count is wrong.\nIt is: %d\nIt should be: 1\n", GS.discardCount[0]);
+call    0 returned 100%
+        2:   50:		pass = 0;
+        -:   51:	}
+        2:   52:	if (GS.deckCount[0] != 0) {
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        2:   53:		printf("Deck count is wrong.\nIt is %d\nIt should be: 0\n", GS.deckCount[0]);
+call    0 returned 100%
+        2:   54:		pass = 0;
+        -:   55:	}
+        2:   56:	if (GS.numActions != 0) {
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+    #####:   57:		printf("Action count is wrong.\nIt is: %d\nIt should be: 0\n", GS.numActions);
+call    0 never executed
+    #####:   58:		pass = 0;
+        -:   59:	}
+        -:   60:	
+        -:   61:	if(pass);
+        -:   62:	
+        2:   63:	printf("\nPass\n");
+call    0 returned 100%
+        -:   64:	
+        2:   65:	printf ("\nEnd of Card Test: Smithy\n"); //message to indicate the test has finished
+call    0 returned 100%
+        2:   66:	return 0; //exit
+        -:   67:}

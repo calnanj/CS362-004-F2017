@@ -1,0 +1,129 @@
+        -:    0:Source:randomtestadventurer.c
+        -:    0:Programs:9
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include "rngs.h"
+        -:    4:#include <math.h>
+        -:    5:#include <stdlib.h>
+        -:    6:#include <time.h>
+        -:    7:#include <string.h>
+        -:    8:#include <stdio.h>
+        -:    9:#include <assert.h>
+        -:   10:#define NUM_TESTS 10
+        -:   11:#define CARD_COUNT treasure_map
+        -:   12:
+function main called 2 returned 0% blocks executed 91%
+        2:   13:int main(){
+        -:   14:	
+        -:   15:	int i,j, player_count, player, seed, deck_treasures, hand_count, pre_count , post_count;
+        2:   16:	int n[10] = {curse,estate,duchy,province,copper,baron, smithy, treasure_map, minion, steward};
+        2:   17:	srand(time(NULL));   
+call    0 returned 100%
+call    1 returned 100%
+        -:   18:	struct gameState GS;
+        -:   19:	
+        2:   20:	printf("Beginning of Random Test: Adventurer\n");	//refactored in assignment 3 (manditory test for assignment 4)
+call    0 returned 100%
+        -:   21:	//Loop
+        6:   22:	for(i = 0;i < NUM_TESTS; i++){ 
+branch  0 taken 100%
+branch  1 taken 0% (fallthrough)
+        6:   23:		pre_count = 0; post_count = 0;
+        6:   24:  		player_count = rand() % 3 + 2;
+call    0 returned 100%
+        6:   25:		seed = rand() % 100;	
+call    0 returned 100%
+        -:   26:		//when game initialized:
+        6:   27:		if(initializeGame(player_count, n, seed, &GS) == -1){ 
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+    #####:   28:			printf("Error with initialization\n");
+call    0 never executed
+    #####:   29:			exit(0);
+call    0 never executed
+        -:   30:		}
+        -:   31:		// random player
+        6:   32:		player = rand() % player_count; 
+call    0 returned 100%
+        6:   33:		GS.whoseTurn = player;
+        6:   34:		GS.numActions = 1;
+        6:   35:		GS.handCount[player] = 5;
+        6:   36:		GS.deckCount[player] = rand() % MAX_HAND;
+call    0 returned 100%
+        6:   37:		GS.discardCount[player] = 0;
+        -:   38:		
+        -:   39:		//random deck
+     1323:   40:		for(j = 0; j < GS.deckCount[player]; j++){
+branch  0 taken 99%
+branch  1 taken 1% (fallthrough)
+     1317:   41:			GS.deck[player][j] = rand() % CARD_COUNT;
+call    0 returned 100%
+     1317:   42:			if(GS.deck[player][j] >= copper && GS.deck[player][j] <= gold){ 
+branch  0 taken 85% (fallthrough)
+branch  1 taken 15%
+branch  2 taken 13% (fallthrough)
+branch  3 taken 87%
+      151:   43:				deck_treasures++;
+        -:   44:			}
+        -:   45:		}
+        -:   46:		//random hand
+       36:   47:		for(j = 0; j < GS.handCount[player]; j++){	
+branch  0 taken 83%
+branch  1 taken 17% (fallthrough)
+       30:   48:			GS.hand[player][j] = rand() % CARD_COUNT;
+call    0 returned 100%
+       30:   49:			if(GS.hand[player][j] >= copper && GS.hand[player][j] <= gold){ 
+branch  0 taken 87% (fallthrough)
+branch  1 taken 13%
+branch  2 taken 4% (fallthrough)
+branch  3 taken 96%
+        1:   50:				pre_count++;	}
+        -:   51:		}
+        -:   52:	
+        6:   53:		GS.hand[player][0] = adventurer; 
+        6:   54:		hand_count = GS.handCount[player];
+        6:   55:		playCard(0, 0, 0, 0, &GS); 
+call    0 returned 100%
+        -:   56:		//2 cards added to hand
+        6:   57:		if(hand_count + 2 != GS.handCount[player]){
+branch  0 taken 17% (fallthrough)
+branch  1 taken 83%
+        1:   58:			printf("Error! Can't add 2 cards to the player's hand\n");
+call    0 returned 100%
+        1:   59:			exit(0);	
+call    0 returned 0%
+        -:   60:		}
+        -:   61:		
+       40:   62:		for(j = 0; j < GS.handCount[player]; j++){
+branch  0 taken 88%
+branch  1 taken 13% (fallthrough)
+       35:   63:			if(GS.hand[player][j] >= copper && GS.hand[player][j] <= gold)
+branch  0 taken 91% (fallthrough)
+branch  1 taken 9%
+branch  2 taken 31% (fallthrough)
+branch  3 taken 69%
+       10:   64:					post_count++;
+        -:   65:		}
+        5:   66:		printf("Pre Count: %d\n", pre_count);
+call    0 returned 100%
+        5:   67:		printf("Post Count: %d\n", post_count);
+call    0 returned 100%
+        -:   68:		
+        5:   69:		if(pre_count + 2 != post_count){
+branch  0 taken 20% (fallthrough)
+branch  1 taken 80%
+        1:   70:			printf("Error! Can't add 2 cards to the player's hand\n");
+call    0 returned 100%
+        1:   71:			exit(0);	
+call    0 returned 0%
+        -:   72:		}
+        4:   73:		printf("Iteration #%d: \n", i);
+call    0 returned 100%
+        -:   74:		
+        -:   75:	}
+    #####:   76:	printf("End of Random Test: Adventurer\n");	
+call    0 never executed
+    #####:   77:	return 0;
+        -:   78:}
+        -:   79:

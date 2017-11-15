@@ -1,0 +1,43 @@
+        -:    0:Source:cardtest3.c
+        -:    0:Programs:9
+        -:    1:/// Jessica Calnan
+        -:    2:/// CS 362 Fall 2017
+        -:    3:/// Assignment 3 Due 10/22/17
+        -:    4:/// Card Test: Embargo
+        -:    5:
+        -:    6:#include "dominion.h"
+        -:    7:#include "dominion_helpers.h"
+        -:    8:#include "rngs.h"
+        -:    9:#include <string.h>
+        -:   10:#include <stdio.h>
+        -:   11:#include <math.h>
+        -:   12:#include <stdlib.h>
+        -:   13:#include <assert.h>
+        -:   14:
+function main called 3 returned 100% blocks executed 80%
+        3:   15:int main(int argc, char** argv)	//argument count and num arguments passed to function
+        -:   16:{
+        -:   17:	struct gameState GS;
+        -:   18:	int n;
+        -:   19:	
+        3:   20:	printf ("\nStart of Card Test: Embargo\n"); //message to indicate the card test has begun
+call    0 returned 100%
+        -:   21:
+        3:   22:	n = cardEffect(embargo, 0, 0, 0, &GS, 1, 0);
+call    0 returned 100%
+        3:   23:	assert(n == 0);
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+call    2 never executed
+        3:   24:	assert(GS.coins == 2);
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+call    2 never executed
+        3:   25:	printf ("\nPass\n");
+call    0 returned 100%
+        -:   26:
+        3:   27:	printf ("\nEnd of Card Test: Embargo\n"); //message to indicate the test has finished
+call    0 returned 100%
+        -:   28:
+        3:   29:	return 0; //exit
+        -:   30:}

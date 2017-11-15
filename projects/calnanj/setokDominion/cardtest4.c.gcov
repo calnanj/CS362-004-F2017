@@ -1,0 +1,46 @@
+        -:    0:Source:cardtest4.c
+        -:    0:Programs:9
+        -:    1:/// Jessica Calnan
+        -:    2:/// CS 362 Fall 2017
+        -:    3:/// Assignment 3 Due 10/22/17
+        -:    4:/// Card Test: Adventurer
+        -:    5:
+        -:    6:#include <stdlib.h>
+        -:    7:#include <stdio.h>
+        -:    8:#include "dominion.h"
+        -:    9:#include "dominion_helpers.h"
+        -:   10:#include "rngs.h"
+        -:   11:#include <assert.h>
+        -:   12:
+function main called 3 returned 100% blocks executed 100%
+        3:   13:int main (int argc, char** argv) //argument count and num arguments passed to function
+        -:   14:{
+        3:   15:  struct gameState *GS = newGame();
+call    0 returned 100%
+        3:   16:  int players = 2;
+        3:   17:  int rand = 60; 
+        3:   18:  int c[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
+        -:   19:	       sea_hag, tribute, smithy};
+        -:   20:
+        3:   21:  int status = initializeGame(players, c, rand, GS); //initialize game
+call    0 returned 100%
+        3:   22:  if(status == 0){
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        3:   23:	printf( "\nStart of Card Test: Adventurer\n");} //message to indicate the testing has begun
+call    0 returned 100%
+        -:   24:  
+        3:   25:  int cards = 0;
+        3:   26:  buyCard(smithy, GS);
+call    0 returned 100%
+        3:   27:  int result = cardEffect(adventurer, cards, cards, cards, GS, 0, NULL);
+call    0 returned 100%
+        3:   28:  if(result == 0){
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        3:   29:	printf( "Pass!\nEnd of Test: Adventurer\n");}  
+call    0 returned 100%
+        -:   30:
+        -:   31:
+        3:   32:  return 0; //exit
+        -:   33:}

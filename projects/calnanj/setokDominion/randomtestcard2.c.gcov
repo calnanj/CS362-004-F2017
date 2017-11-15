@@ -1,0 +1,137 @@
+        -:    0:Source:randomtestcard2.c
+        -:    0:Programs:9
+        -:    1://  Jessica Calnan
+        -:    2://  CS 362-004-F2017 
+        -:    3://  Assignment 5 (Due 11/19/17)
+        -:    4://  randomtestcard2.c
+        -:    5://  Random Test for Smithy Card
+        -:    6://  Refactored from previous assignment to test on setok's code
+        -:    7:
+        -:    8:#include <stdio.h>
+        -:    9:#include <math.h>
+        -:   10:#include <stdlib.h>
+        -:   11:#include <time.h>
+        -:   12:#include <string.h>
+        -:   13:#include "dominion.h"
+        -:   14:#include "rngs.h"
+        -:   15:
+        -:   16:// Smithy: Draw 3 Cards
+        -:   17:
+function main called 1 returned 100% blocks executed 94%
+        1:   18:int main()
+        -:   19:{
+        1:   20:    srand(time(NULL));
+call    0 returned 100%
+call    1 returned 100%
+        -:   21:    
+        -:   22:    struct gameState GS;
+        -:   23:    
+        1:   24:    int players = (rand() % MAX_PLAYERS - 1) + 2; 
+call    0 returned 100%
+        1:   25:    int tests = 500;
+        1:   26:    int random = 0;
+        -:   27:    int i, deckCount;
+        1:   28:    int err = 0;
+        1:   29:    int pass = 0;
+        -:   30:    
+        1:   31:    int k[10] = {adventurer, council_room, minion, feast, mine, smithy, steward, village, tribute, sea_hag};
+        -:   32:    
+        1:   33:    printf("Random Test: Smithy Card\n");
+call    0 returned 100%
+        -:   34:    
+        -:   35:    
+      501:   36:    for (i = 0; i < tests; i++)
+branch  0 taken 99%
+branch  1 taken 1% (fallthrough)
+        -:   37:    {
+      500:   38:        int seed = rand();
+call    0 returned 100%
+        -:   39:        
+        -:   40:        struct gameState prev;
+      500:   41:        initializeGame(players, k, seed, &GS);
+call    0 returned 100%
+        -:   42:        
+      500:   43:        int currPlayer = rand() % players;
+call    0 returned 100%
+        -:   44:        
+      500:   45:        random = rand() % 10;
+call    0 returned 100%
+      500:   46:        if (random == 5)
+branch  0 taken 9% (fallthrough)
+branch  1 taken 91%
+        -:   47:        {
+       47:   48:            GS.deckCount[currPlayer] = 0;
+       47:   49:            deckCount = 0;
+        -:   50:        }
+        -:   51:        else
+        -:   52:        {
+      453:   53:            deckCount = rand() % MAX_DECK;
+call    0 returned 100%
+      453:   54:            GS.deckCount[currPlayer] = deckCount;
+        -:   55:        }
+        -:   56:        
+      500:   57:        GS.handCount[currPlayer] = rand() % MAX_HAND;
+call    0 returned 100%
+        -:   58:        
+      500:   59:        GS.discardCount[currPlayer] = rand() % MAX_DECK;
+call    0 returned 100%
+        -:   60:        
+      500:   61:        int cardA = rand() % 10;
+call    0 returned 100%
+      500:   62:        int cardB = rand() % 10;
+call    0 returned 100%
+      500:   63:        int cardC = rand() % 10;
+call    0 returned 100%
+        -:   64:        
+      500:   65:        memcpy(&prev, &GS, sizeof(struct gameState));
+        -:   66:       
+      500:   67:        GS.hand[currPlayer][0] = smithy;
+      500:   68:        cardEffect(smithy, cardA, cardB, cardC, &GS, 0, 0);
+call    0 returned 100%
+        -:   69:        
+        -:   70:        // check +3 cards??
+      500:   71:        if(GS.handCount[currPlayer] != prev.handCount[currPlayer] + 3)
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        -:   72:        {
+      500:   73:            err++;
+      500:   74:            printf("There were not 3 cards added\n");
+call    0 returned 100%
+        -:   75:        }
+    #####:   76:        else pass++;
+        -:   77:        
+        -:   78:        // discard count accurate??
+      500:   79:        if(GS.discardCount[currPlayer] != prev.discardCount[currPlayer] + 1)
+branch  0 taken 100% (fallthrough)
+branch  1 taken 0%
+        -:   80:        {
+      500:   81:            err++;
+      500:   82:            printf("Discard count not accurate\n");
+call    0 returned 100%
+        -:   83:        }
+    #####:   84:        else pass++;
+        -:   85:        
+        -:   86:        // smithy discarded??
+      500:   87:        if (GS.hand[currPlayer][0] != smithy)
+branch  0 taken 32% (fallthrough)
+branch  1 taken 68%
+        -:   88:        {
+      160:   89:            pass++;
+        -:   90:        }
+        -:   91:        else
+        -:   92:        {
+      340:   93:            err++;
+      340:   94:            printf("Smithy card not discarded\n");
+call    0 returned 100%
+        -:   95:        }
+        -:   96:        
+        -:   97:        
+        -:   98:    }
+        1:   99:    printf("End of Random Test: Smithy Card\n");
+call    0 returned 100%
+        1:  100:    printf("There were %d errors\n", err);
+call    0 returned 100%
+        1:  101:    printf("%d of the tests passed\n", pass);
+call    0 returned 100%
+        -:  102:
+        -:  103:}
