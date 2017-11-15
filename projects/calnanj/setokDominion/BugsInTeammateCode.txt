@@ -65,8 +65,15 @@ Description/Symptom/How Bug Was Found:
 	
 	When played, the village card should discard the played card from the player’s hand. 
 	Instead, this does not seem to be the case. The handCount is one more than it should be upon finishing 
-	playing the village card. This bug can be seen/reproduced during play of the game.  I do not have a test written 
-	for this card. My teammate also commented his bugs very well so it was easy to spot upon a closer look at his code. 
+	playing the village card. This bug can be seen/reproduced during play of the game.  My test written for this card, 
+	randomtestcard1.c did not catch this bug.  This is something that I will need to go back and rewrite in order to 
+	catch for this error.  As seen below, my test produced a message saying there were no errors. This is a topic I will 
+	discuss more in the debugging section.  My teammate also commented his bugs very well so it was easy to spot upon a closer look at his code. 
+		My test results are as follows:
+			“Beginning of Random Card Test: Village
+			Errors: 0
+ 			End of Random Card Test: Village”
+
 	
 Cause/Fix:
 
