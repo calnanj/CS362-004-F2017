@@ -1,0 +1,90 @@
+Bug #1
+
+In Function:  smithy_card
+
+Description/Symptom:
+
+	Testing of the smithy card revealed a bug in the quantity of cards drawn. 
+	When played, the smithy card should "draw" 3 cards from the deck and place them in the player’s hand. 
+	Instead, only one card seeems to be drawn. Also, it looks as though the discard functionality is also incorrect. 
+	This bug can be seen/reproduced in testing as well as during play of the game.
+	My test results are as follows:
+				"Start of Card Test: Smithy
+					Hand count is wrong.
+					It is: 1
+					It should be: 3
+					Discard count is wrong.
+					It is: 0
+					It should be: 1
+					Deck count is wrong.
+					It is 3
+					It should be: 0
+
+					Pass
+
+				End of Card Test: Smithy"
+
+
+Cause:
+
+ My teammate's code is as follows:
+		int smithy_card(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus) 
+		{
+			int i;
+			int currentPlayer = whoseTurn(state);
+			currentPlayer = currentPlayer + 1;
+
+			//+3 Cards
+		for (i = 0; i > 3; i++) 
+		{
+			drawCard(currentPlayer, state);
+		}
+			
+			//discard card from hand
+		discardCard(handPos, currentPlayer, state, 0);
+		return 0;
+		}
+
+		On the line that reads: "for (i = 0; i > 3; i++)"  the statement i > 3 should be i < 3.  
+		This will cause the error of the incorrect number of cards to be drawn.
+		
+How I Found the Bug:
+	Although my teammate outlined his code very well with comments and clearly defined all of his bugs, it
+	was easy to find upon testing as well as when the game was played.  
+	
+Fixes:
+	If someone had access to the source code, this would be a very easy bug to fix.  Simply by changing the "greater than" symbol (>)
+	to a "less than" symbol (<) in that for-loop mentioned above would fix this bug. 
+	
+
+Bug #2
+
+In Function: village_card
+
+Description/Symptom/How Bug Was Found:
+	
+	When played, the village card should discard the played card from the player’s hand. 
+	Instead, this does not seem to be the case. The handCount is one more than it should be upon finishing 
+	playing the village card. This bug can be seen/reproduced during play of the game.  I do not have a test written 
+	for this card. My teammate also commented his bugs very well so it was easy to spot upon a closer look at his code. 
+	
+Cause/Fix:
+
+ My teammate's code is as follows:
+		int village_card(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus) 
+		{
+			int currentPlayer = whoseTurn(state);
+
+			//+1 Card
+			drawCard(currentPlayer, state);
+			
+			//+2 Actions
+			state->numActions = state->numActions + 2;
+			
+			//discard played card from hand
+			discardCard(handPos, currentPlayer, state, 0);
+			return -1;
+		}
+		
+		On the last line of code that reads "return -1;" the correct return value should be 0.  This will correctly discard the 
+		village card that was played. 
