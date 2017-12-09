@@ -1,0 +1,36 @@
+        -:    0:Source:unittest1.c
+        -:    0:Graph:unittest1.gcno
+        -:    0:Data:unittest1.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/// Jessica Calnan
+        -:    2:/// CS 362 Fall 2017
+        -:    3:/// Assignment 3 Due 10/22/17
+        -:    4:/// Unit Test: Is Game Over
+        -:    5:
+        -:    6:#include "dominion.h"
+        -:    7:#include "dominion_helpers.h"
+        -:    8:#include "rngs.h"
+        -:    9:#include <string.h>
+        -:   10:#include <stdio.h>
+        -:   11:#include <math.h>
+        -:   12:#include <stdlib.h>
+        -:   13:#include <assert.h>
+        -:   14:
+        1:   15:int main(int argc, char** argv) //argument count and num arguments passed to function
+        -:   16:{
+        -:   17:	struct gameState GS;
+        1:   18:	int c[10] = { sea_hag, tribute, smithy, village, minion, mine, adventurer, gardens, embargo, cutpurse }; //cards
+        1:   19:	int n = initializeGame(2, c, 3, &GS);
+        -:   20:	
+        1:   21:	printf("\nBegin Testing: Is Game Over\n"); //message that testing has begun
+        -:   22:
+        1:   23:	int i = isGameOver(&GS); //did the test pass?
+        1:   24:	assert(i == 0);
+        1:   25:	printf("\n Pass \n");
+        -:   26:
+        1:   27:	printf("\nEnd of Test: Is Game Over\n"); //message that testing has ended
+        -:   28:	
+        1:   29:	assert(n == 0);
+        1:   30:	return 0; //exit
+        -:   31:} 

@@ -1,0 +1,58 @@
+        -:    0:Source:unittest4.c
+        -:    0:Graph:unittest4.gcno
+        -:    0:Data:unittest4.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/// Jessica Calnan
+        -:    2:/// CS 362 Fall 2017
+        -:    3:/// Assignment 3 Due 10/22/17
+        -:    4:/// Unit Test: Buy Card
+        -:    5:
+        -:    6:#include "dominion.h"
+        -:    7:#include "dominion_helpers.h"
+        -:    8:#include "rngs.h"
+        -:    9:#include <string.h>
+        -:   10:#include <stdio.h>
+        -:   11:#include <math.h>
+        -:   12:#include <stdlib.h>
+        -:   13:#include <assert.h>
+        -:   14:
+        -:   15:
+        1:   16:int main (int argc, char** argv) //argument count and num arguments passed to function	
+        -:   17:{
+        -:   18:	struct gameState GS;
+        1:   19:	printf("\nStart Test: Buy Card\n"); //message that testing has begun
+        -:   20:	
+        1:   21:	GS.numBuys = 2;
+        1:   22:	GS.coins = 2;
+        1:   23:	printf("Need more coins to test\n");
+        1:   24: 	int test = buyCard(2, &GS);
+        1:   25:		if(test == -1)
+        1:   26:			printf("\nPass\n"); //test pass? (1)
+        -:   27:		else
+    #####:   28:			printf("\nFail\n");
+        1:   29:	printf("Test: purchase\n");
+        1:   30:	GS.coins = 10;
+        1:   31:	test = buyCard(2, &GS);
+        1:   32:		if(test == 0)
+    #####:   33:			printf("\nPass\n"); //test pass? (2)
+        -:   34:		else
+        1:   35:			printf("\nFail\n");
+        1:   36: 	printf("Test: amount\n");
+        1:   37: 	test = buyCard(2, &GS);
+        1:   38:		if(test == 0)
+    #####:   39:			printf("\nPass\n"); //test pass? (3)
+        -:   40:		else
+        1:   41:			printf("\nFail\n");
+        1:   42: 	printf("Test: purchases remaining\n");
+        1:   43: 	GS.coins = 6;
+        1:   44:	test = buyCard(2, &GS);
+        1:   45:		if(test == -1)
+        1:   46:			printf("\nPass\n"); //test pass all 3 times = pass for whole test
+        -:   47:		else
+    #####:   48:			printf("\nFail\n");
+        -:   49:		
+        1:   50: 	printf("\nEnd of Test: Buy Card\n");  //message that testing has ended
+        -:   51:	
+        1:   52: 	return 0;	 //exit
+        -:   53:}

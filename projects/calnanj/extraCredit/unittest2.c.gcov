@@ -1,0 +1,104 @@
+        -:    0:Source:unittest2.c
+        -:    0:Graph:unittest2.gcno
+        -:    0:Data:unittest2.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/// Jessica Calnan
+        -:    2:/// CS 362 Fall 2017
+        -:    3:/// Assignment 3 Due 10/22/17
+        -:    4:/// Unit Test: Update Coins
+        -:    5:
+        -:    6:#include "dominion.h"
+        -:    7:#include "dominion_helpers.h"
+        -:    8:#include "rngs.h"
+        -:    9:#include <string.h>
+        -:   10:#include <stdio.h>
+        -:   11:#include <math.h>
+        -:   12:#include <stdlib.h>
+        -:   13:#include <assert.h>
+        -:   14:	
+        1:   15:int main (int argc, char** argv)	//argument count and num arguments passed to function
+        -:   16:{
+        -:   17:	struct gameState GS;
+        1:   18:	GS.coins = 0;
+        -:   19:	
+        1:   20:	printf("\nBegin Testing: Update Coins\n"); //message that testing has begun
+        -:   21:	
+        -:   22:	//must test all three coin types (silver, gold, copper)
+        -:   23:	//must test that another card (not a coin card) will yield zero coins 
+        -:   24:	
+        1:   25:	printf("\nWe will start by testing zero coins\n");
+        1:   26:	GS.hand[0][1] = smithy;
+        1:   27:	GS.hand[0][2] = smithy;
+        1:   28:	GS.hand[0][3] = smithy;
+        1:   29:	GS.hand[0][4] = smithy;
+        1:   30:	GS.hand[0][5] = smithy;
+        1:   31:	GS.hand[0][6] = smithy;
+        1:   32:	GS.hand[0][7] = smithy;
+        1:   33:	GS.hand[0][8] = smithy;
+        1:   34:	GS.hand[0][9] = smithy;
+        1:   35:	updateCoins(0,&GS, 0);
+        1:   36:	printf("\nWe should have no coins: %d\n", GS.coins);
+        1:   37:	if(GS.coins == 0)
+        1:   38:		printf("\nPass"); //did the test pass?
+        -:   39:	else
+    #####:   40:		printf("\nFail");
+        -:   41:	
+        -:   42:	//begin coin cards tests
+        1:   43:	printf("\nThen, we will test gold coins\n");
+        1:   44:	GS.hand[0][0] = gold;
+        1:   45:	GS.hand[0][1] = gold;
+        1:   46:	GS.hand[0][2] = gold;
+        1:   47:	GS.hand[0][3] = gold;
+        1:   48:	GS.hand[0][4] = gold;
+        1:   49:	GS.hand[0][5] = gold;
+        1:   50:	GS.hand[0][6] = gold;
+        1:   51:	GS.hand[0][7] = gold;
+        1:   52:	GS.hand[0][8] = gold;
+        1:   53:	GS.hand[0][9] = gold;
+        1:   54:	updateCoins(0,&GS, 0);
+        1:   55:	printf("\nThere should be 10 gold coins: %d\n", GS.coins);
+        1:   56:	if(GS.coins == 10)
+    #####:   57:		printf("\nPass\n"); //did the test pass?
+        -:   58:	else
+        1:   59:		printf("\nFail\n");
+        -:   60:	
+        1:   61:	printf("\nNext, we will test silver coins\n");
+        1:   62:	GS.hand[0][0] = silver;
+        1:   63:	GS.hand[0][1] = silver;
+        1:   64:	GS.hand[0][2] = silver;
+        1:   65:	GS.hand[0][3] = silver;
+        1:   66:	GS.hand[0][4] = silver;
+        1:   67:	GS.hand[0][5] = silver;
+        1:   68:	GS.hand[0][6] = silver;
+        1:   69:	GS.hand[0][7] = silver;
+        1:   70:	GS.hand[0][8] = silver;
+        1:   71:	GS.hand[0][9] = silver;
+        1:   72:	updateCoins(0,&GS, 0);
+        1:   73:	printf("\nThere should be 10 silver coins: %d\n", GS.coins);
+        1:   74:	if(GS.coins == 20)
+    #####:   75:		printf("\nPass\n"); //did the test pass?
+        -:   76:	else
+        1:   77:		printf("\nFail\n");
+        -:   78:	
+        1:   79:	printf("\nFinally, we will test copper coins\n");
+        1:   80:	GS.hand[0][1] = gold;
+        1:   81:	GS.hand[0][2] = gold;
+        1:   82:	GS.hand[0][3] = gold;
+        1:   83:	GS.hand[0][4] = gold;
+        1:   84:	GS.hand[0][5] = gold;
+        1:   85:	GS.hand[0][6] = gold;
+        1:   86:	GS.hand[0][7] = gold;
+        1:   87:	GS.hand[0][8] = gold;
+        1:   88:	GS.hand[0][9] = gold;
+        1:   89:	updateCoins(0,&GS, 0);
+        1:   90:	printf("\nThere should be 10 gold coins: %d\n", GS.coins);
+        1:   91:	if(GS.coins == 30)
+    #####:   92:		printf("\nPass\n"); //did the test pass?
+        -:   93:	else
+        1:   94:		printf("\nFail\n");
+        -:   95:	
+        1:   96:	printf("\nEnd of Test: Update Coins******\n"); //message that testing has ended
+        -:   97:
+        1:   98:	return 0; //exit
+        -:   99:}
